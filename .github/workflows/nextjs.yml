@@ -1,0 +1,56 @@
+name: Deploy Next.js Project
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment only when pushing to the 'main' branch
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Use the Node.js version compatible with Next.js
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js project
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY }}  # Add the secrets you defined
+          NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}  # Add any other secrets here
+
+      - name: Deploy to Vercel
+        run: vercel --prod
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY }}
+          NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint the project
+        run: npm run lint
