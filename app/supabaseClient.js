@@ -1,8 +1,8 @@
 // supabaseClient.js
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const supabaseUrl = process.env.supabaseUrl
+const supabaseAnonKey = process.env.Anon_Key
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   realtime: { enabled: true }
