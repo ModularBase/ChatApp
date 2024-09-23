@@ -27,8 +27,8 @@ jobs:
       - name: Build Next.js project
         run: npm run build
         env:
-          NEXT_PUBLIC_API_KEY: ${{ secrets.supabaseUrl }}  # Add the secrets you defined
-          NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.supabaseAnonKey }}  # Add any other secrets here
+          NEXT_PUBLIC_API_KEY: ${{ secrets.SUPABASEURL }}  # Add the secrets you defined
+          NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.SUPABASEANONKEY }}  # Add any other secrets here
 
 
 
