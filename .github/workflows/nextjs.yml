@@ -27,15 +27,10 @@ jobs:
       - name: Build Next.js project
         run: npm run build
         env:
-          NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY }}  # Add the secrets you defined
-          NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}  # Add any other secrets here
+          NEXT_PUBLIC_API_KEY: ${{ secrets.supabaseUrl }}  # Add the secrets you defined
+          NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.supabaseAnonKey }}  # Add any other secrets here
 
-      - name: Deploy to Vercel
-        run: vercel --prod
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY }}
-          NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
+
 
   lint:
     runs-on: ubuntu-latest
